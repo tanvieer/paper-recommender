@@ -5,7 +5,7 @@ import { Button, TextField, Typography, Container, Grid, CircularProgress, Paper
 const RecommendationForm = () => {
   const [title, setTitle] = useState('');
   const [abstract, setAbstract] = useState('');
-  const [recommendations, setRecommendations] = useState([]);
+  const [recommendations, setRecommendations] = useState({}); // Changed from [] to {}
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -16,13 +16,11 @@ const RecommendationForm = () => {
     setError('');
 
     try {
-      // Replace with your FastAPI server URL (ngrok or deployed URL)
       const response = await axios.post('http://127.0.0.1:5000/testrecommend', {
         title,
         abstract,
       });
 
-      // Set recommendations in state
       setRecommendations(response.data);
     } catch (err) {
       setError('Error fetching recommendations');
@@ -78,7 +76,7 @@ const RecommendationForm = () => {
           </Typography>
         )}
 
-        {recommendations.length > 0 && (
+        {Object.keys(recommendations).length > 0 && (
           <Box style={{ marginTop: '30px' }}>
             <Typography variant="h6" gutterBottom>
               Recommendations:
