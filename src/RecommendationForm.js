@@ -63,45 +63,42 @@ const RecommendationForm = () => {
         </Typography>
 
         <form onSubmit={handleSubmit}>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <TextField
-                label="Paper Title"
-                variant="outlined"
-                fullWidth
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                sx={{
-                  mb: 2,
-                  backgroundColor: "#fff",
+          <Box sx={{ width: "100%" }}>
+            <TextField
+              label="Paper Title"
+              variant="outlined"
+              fullWidth
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              sx={{
+                mb: 3,
+                backgroundColor: "#fff",
+                borderRadius: 1,
+                "& .MuiInputBase-root": {
                   borderRadius: 1,
-                  "& .MuiInputBase-root": {
-                    borderRadius: 1,
-                  },
-                }}
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Abstract"
-                variant="outlined"
-                fullWidth
-                multiline
-                rows={4}
-                value={abstract}
-                onChange={(e) => setAbstract(e.target.value)}
-                sx={{
-                  backgroundColor: "#fff",
+                },
+              }}
+              required
+            />
+            <TextField
+              label="Abstract"
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={6}
+              value={abstract}
+              onChange={(e) => setAbstract(e.target.value)}
+              sx={{
+                mb: 3,
+                backgroundColor: "#fff",
+                borderRadius: 1,
+                "& .MuiInputBase-root": {
                   borderRadius: 1,
-                  "& .MuiInputBase-root": {
-                    borderRadius: 1,
-                  },
-                }}
-                required
-              />
-            </Grid>
-          </Grid>
+                },
+              }}
+              required
+            />
+          </Box>
           <Box display="flex" justifyContent="center" mt={4} mb={2}>
             <Button
               variant="contained"
