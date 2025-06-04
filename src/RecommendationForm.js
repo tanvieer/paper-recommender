@@ -40,10 +40,11 @@ const RecommendationForm = () => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 8 }}>
-      <Paper
+    <Container maxWidth="95%" sx={{ mt: 8 }}>
+      <Paper // this need to be full width
         elevation={8}
         sx={{
+          width: "95%",
           p: 6,
           borderRadius: 5,
           background: "linear-gradient(135deg, #e3f2fd 0%, #fff 100%)",
