@@ -150,30 +150,30 @@ const RecommendationForm = () => {
                 >
                   Recommendations:
                 </Typography>
-                <Grid container spacing={3} justifyContent="center">
+                <Box sx={{ width: "100%" }}>
                   {Object.keys(recommendations).map((key, idx) => (
-                    <Grid item xs={12} key={key}>
-                      <Paper
-                        elevation={3}
-                        sx={{
-                          p: 3,
-                          background: idx % 2 === 0 ? "#bbdefb" : "#e3f2fd",
-                          borderLeft: "8px solid #1976d2",
-                          borderRadius: 3,
-                          width: "100%",
-                          boxSizing: "border-box",
-                          "&:hover": {
-                            boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
-                          },
-                        }}
-                      >
-                        <Typography variant="body1" fontWeight={600}>
-                          {idx + 1}. {recommendations[key]}
-                        </Typography>
-                      </Paper>
-                    </Grid>
+                    <Paper
+                      key={key}
+                      elevation={3}
+                      sx={{
+                        p: 3,
+                        mb: 2,
+                        background: idx % 2 === 0 ? "#bbdefb" : "#e3f2fd",
+                        borderLeft: "8px solid #1976d2",
+                        borderRadius: 3,
+                        width: "100%",
+                        boxSizing: "border-box",
+                        "&:hover": {
+                          boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+                        },
+                      }}
+                    >
+                      <Typography variant="body1" fontWeight={600} align="left">
+                        {idx + 1}. {recommendations[key]}
+                      </Typography>
+                    </Paper>
                   ))}
-                </Grid>
+                </Box>
               </>
             )}
           </Box>
