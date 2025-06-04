@@ -83,23 +83,7 @@ const RecommendationForm = () => {
               }}
               required
             />
-            <TextField
-              label="Abstract"
-              variant="outlined"
-              fullWidth
-              multiline
-              rows={6}
-              value={abstract}
-              onChange={(e) => setAbstract(e.target.value)}
-              sx={{
-                mb: 3,
-                backgroundColor: "#fff",
-                borderRadius: 1,
-                "& .MuiInputBase-root": {
-                  borderRadius: 1,
-                },
-              }}
-            />
+            {/* Abstract field removed */}
           </Box>
           <Box display="flex" justifyContent="center" mt={4} mb={2}>
             <Button
