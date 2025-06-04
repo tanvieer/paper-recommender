@@ -5,7 +5,6 @@ import {
   TextField,
   Typography,
   Container,
-  Grid,
   CircularProgress,
   Paper,
   Box,
@@ -20,17 +19,21 @@ const RecommendationForm = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const apiHost = process.env.REACT_APP_API_HOST;
+  //   const apiHost = "https://8d49-34-168-104-130.ngrok-free.app/"; // Replace with your actual API host
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
+    console.log("Submitting:", { title, abstract });
+    console.log("API Host:", apiHost);
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/testrecommend", {
+      const response = await axios.post(`${apiHost}testrecommend`, {
         title,
         abstract,
       });
-
       setRecommendations(response.data);
     } catch (err) {
       setError("Error fetching recommendations");
@@ -96,7 +99,6 @@ const RecommendationForm = () => {
                   borderRadius: 1,
                 },
               }}
-              required
             />
           </Box>
           <Box display="flex" justifyContent="center" mt={4} mb={2}>
