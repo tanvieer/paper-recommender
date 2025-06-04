@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Button, TextField, Typography, Container, Grid, CircularProgress, Paper, Box } from '@mui/material';
+import { Button, TextField, Typography, Container, Grid, CircularProgress, Paper, Box, Fade } from '@mui/material';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
 const RecommendationForm = () => {
   const [title, setTitle] = useState('');
   const [abstract, setAbstract] = useState('');
-  const [recommendations, setRecommendations] = useState({}); // Changed from [] to {}
+  const [recommendations, setRecommendations] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Handle API request
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -30,20 +30,35 @@ const RecommendationForm = () => {
   };
 
   return (
-    <Container maxWidth="sm" style={{ marginTop: '50px' }}>
-      <Paper style={{ padding: '20px', borderRadius: '8px', backgroundColor: '#f5f5f5' }}>
-        <Typography variant="h4" align="center" gutterBottom>
-          Research Paper Recommender
+    <Container maxWidth="sm" sx={{ mt: 8 }}>
+      <Paper
+        elevation={6}
+        sx={{
+          p: 4,
+          borderRadius: 4,
+          background: 'linear-gradient(135deg, #e3f2fd 0%, #fff 100%)',
+          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.15)',
+        }}
+      >
+        <Box display="flex" alignItems="center" justifyContent="center" mb={2}>
+          <AutoAwesomeIcon color="primary" sx={{ fontSize: 40, mr: 1 }} />
+          <Typography variant="h4" fontWeight={700} color="primary">
+            Paper Recommender
+          </Typography>
+        </Box>
+
+        <Typography variant="subtitle1" align="center" color="text.secondary" mb={3}>
+          Get personalized research paper suggestions instantly!
         </Typography>
 
         <form onSubmit={handleSubmit}>
           <TextField
-            label="Title"
+            label="Paper Title"
             variant="outlined"
             fullWidth
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            style={{ marginBottom: '20px' }}
+            sx={{ mb: 2, background: '#fff' }}
             required
           />
           <TextField
@@ -54,44 +69,65 @@ const RecommendationForm = () => {
             rows={4}
             value={abstract}
             onChange={(e) => setAbstract(e.target.value)}
-            style={{ marginBottom: '20px' }}
+            sx={{ mb: 3, background: '#fff' }}
             required
           />
-          <Box display="flex" justifyContent="center" style={{ marginBottom: '20px' }}>
+          <Box display="flex" justifyContent="center" mb={2}>
             <Button
               variant="contained"
               color="primary"
               type="submit"
               disabled={loading}
-              style={{ padding: '10px 30px' }}
+              sx={{
+                px: 5,
+                py: 1.5,
+                fontWeight: 600,
+                fontSize: 18,
+                borderRadius: 3,
+                boxShadow: '0 2px 8px rgba(33,150,243,0.15)',
+              }}
             >
-              {loading ? <CircularProgress size={24} color="inherit" /> : 'Get Recommendations'}
+              {loading ? <CircularProgress size={28} color="inherit" /> : 'Get Recommendations'}
             </Button>
           </Box>
         </form>
 
         {error && (
-          <Typography variant="body2" color="error" align="center" style={{ marginBottom: '20px' }}>
+          <Typography variant="body2" color="error" align="center" sx={{ mb: 2 }}>
             {error}
           </Typography>
         )}
 
-        {Object.keys(recommendations).length > 0 && (
-          <Box style={{ marginTop: '30px' }}>
-            <Typography variant="h6" gutterBottom>
-              Recommendations:
-            </Typography>
-            <Grid container spacing={2}>
-              {Object.keys(recommendations).map((key) => (
-                <Grid item xs={12} sm={6} key={key}>
-                  <Paper style={{ padding: '10px', backgroundColor: '#e3f2fd' }}>
-                    <Typography variant="body1">{recommendations[key]}</Typography>
-                  </Paper>
+        <Fade in={Object.keys(recommendations).length > 0}>
+          <Box sx={{ mt: 4 }}>
+            {Object.keys(recommendations).length > 0 && (
+              <>
+                <Typography variant="h6" gutterBottom color="primary" fontWeight={600}>
+                  Recommendations:
+                </Typography>
+                <Grid container spacing={2}>
+                  {Object.keys(recommendations).map((key, idx) => (
+                    <Grid item xs={12} key={key}>
+                      <Paper
+                        elevation={2}
+                        sx={{
+                          p: 2,
+                          background: idx % 2 === 0 ? '#bbdefb' : '#e3f2fd',
+                          borderLeft: '6px solid #1976d2',
+                          borderRadius: 2,
+                        }}
+                      >
+                        <Typography variant="body1" fontWeight={500}>
+                          {recommendations[key]}
+                        </Typography>
+                      </Paper>
+                    </Grid>
+                  ))}
                 </Grid>
-              ))}
-            </Grid>
+              </>
+            )}
           </Box>
-        )}
+        </Fade>
       </Paper>
     </Container>
   );
